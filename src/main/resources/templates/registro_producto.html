@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Producto</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1 th:text="${#fields.hasErrors()} ? 'Editar Producto' : 'Registrar Producto'"></h1>
+<form th:action="@{/productos}" th:object="${producto}" method="post">
+  <input type="hidden" th:field="*{serialProductos}">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" th:field="*{nombre}" required>
+  <label for="descripcion">Descripción:</label>
+  <input type="text" id="descripcion" th:field="*{descripcion}" required>
+  <label for="precio">Precio:</label>
+  <input type="number" step="0.01" id="precio" th:field="*{precio}" required>
+  <label for="proveedoresNitProveedor">Proveedor:</label>
+  <input type="text" id="proveedoresNitProveedor" th:field="*{proveedoresNitProveedor}" required>
+  <button type="submit">Guardar</button>
+</form>
+<a th:href="@{/productos}">Volver</a>
+</body>
+</html>
+
