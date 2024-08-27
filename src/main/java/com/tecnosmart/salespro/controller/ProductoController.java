@@ -1,19 +1,26 @@
 package com.tecnosmart.salespro.controller;
 
 import com.tecnosmart.salespro.model.Producto;
+import com.tecnosmart.salespro.repository.ProductoRepository;
 import com.tecnosmart.salespro.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @Controller
 public class ProductoController {
 
+    private final ProductoService productoService;
     @Autowired
-    private ProductoService productoService;
+    private ProductoRepository productoRepository;
+
+    public ProductoController(ProductoService productoService, ProductoRepository productoRepository) {
+        this.productoService = productoService;
+    }
 
     @GetMapping("/productos")
     public String listarProductos(Model model) {
@@ -28,10 +35,15 @@ public class ProductoController {
         return "registro_producto";
     }
 
-    @PostMapping("/productos")
-    public String registrarProducto(@ModelAttribute Producto producto) {
-        productoService.guardarProducto(producto);
-        return "redirect:/productos";
+    @PostMapping("/productos/guardar")
+    public String guardarProducto(@ModelAttribute Producto producto, Model model) {
+        try {
+            productoRepository.save(producto);
+            return "redirect:/productos";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Error al guardar el producto: " + e.getMessage());
+            return "registro_producto";
+        }
     }
 
     @GetMapping("/productos/editar/{id}")
