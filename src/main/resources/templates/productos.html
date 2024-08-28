@@ -3,13 +3,18 @@
       xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- titulo de la página -->
   <title>Lista de Productos</title>
   <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body>
-<h1>Lista de Productos</h1>
+<body class="lista">
+<!-- título principal -->
+<h1 class="titulo">Lista de Productos</h1>
+<!-- tabla que indica los productos inscritos -->
 <table>
-  <thead>
+  <thead class="lista_productos">
   <tr>
     <th>Serial</th>
     <th>Nombre</th>
@@ -33,6 +38,7 @@
   </tr>
   </tbody>
 </table>
+<!-- botón para ir al formulario para agregar producto nuevo-->
 <form action="/productos/nuevo" method="get">
   <button type="submit">Agregar Nuevo Producto</button>
 </form>

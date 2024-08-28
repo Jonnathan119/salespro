@@ -29,12 +29,13 @@ public class ProductoController {
         return "productos";
     }
 
+    //mapeo de la vista del formulario
     @GetMapping("/productos/nuevo")
     public String mostrarFormularioDeRegistro(Model model) {
         model.addAttribute("producto", Producto.createProducto());
         return "registro_producto";
     }
-
+    //mapeo para guardar un producto en la base de datos
     @PostMapping("/productos/guardar")
     public String guardarProducto(@ModelAttribute Producto producto, Model model) {
         try {
@@ -46,6 +47,7 @@ public class ProductoController {
         }
     }
 
+    //mapeo para editar un producto de la lista
     @GetMapping("/productos/editar/{id}")
     public String mostrarFormularioDeEdicion(@PathVariable("id") int id, Model model) {
         Producto producto = productoService.obtenerProductoPorId(id);
@@ -53,6 +55,7 @@ public class ProductoController {
         return "registro_producto";
     }
 
+    //mapeo para eliminar un producto de la lista
     @GetMapping("/productos/eliminar/{id}")
     public String eliminarProducto(@PathVariable("id") int id) {
         productoService.eliminarProducto(id);
